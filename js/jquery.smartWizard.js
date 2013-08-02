@@ -137,7 +137,7 @@ function SmartWizard(target, options) {
               $this.curStepIdx = parseInt(step)-1;
           }
           window.addEventListener( 'hashchange', function(e){
-                step = hash.slice( 2 ).split( '/' );
+                step = window.location.hash.slice( 2 ).split( '/' );
 
                 $this.goToStep(parseInt(step)-1)
 
