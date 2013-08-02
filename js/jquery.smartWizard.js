@@ -130,7 +130,21 @@ function SmartWizard(target, options) {
         }
         //  Prepare the steps
         _prepareSteps($this);
-        // Show the first slected step
+        if ($this.options.enableAllSteps){
+          var hash = window.location.hash;
+          if (hash){
+            var step = hash.slice( 2 ).split( '/' );
+              $this.curStepIdx = parseInt(step)-1;
+          }
+          window.addEventListener( 'hashchange', function(e){
+                step = hash.slice( 2 ).split( '/' );
+
+                $this.goToStep(parseInt(step)-1)
+
+            }, false );
+        }
+
+
         _loadContent($this, $this.curStepIdx);
     };
 
@@ -193,6 +207,9 @@ function SmartWizard(target, options) {
             }
         }else{
             _showStep($this,stepIdx);
+        }
+        if ($this.options.enableAllSteps){
+            window.location.hash = "/"+ (parseInt(stepIdx)+1);
         }
     };
 
