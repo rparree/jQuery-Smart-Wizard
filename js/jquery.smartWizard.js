@@ -140,8 +140,10 @@ function SmartWizard(target, options) {
           }
           window.addEventListener( 'hashchange', function(e){
                 step = window.location.hash.slice( 2 ).split( '/' );
+                var gotoStep = parseInt(step)-1
 
-                $this.goToStep(parseInt(step)-1)
+                if ($this.curStepIdx != gotoStep)  // to stop from recursivly calling this event listener
+                  $this.goToStep(gotoStep)
 
             }, false );
         }
